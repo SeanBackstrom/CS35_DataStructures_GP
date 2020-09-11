@@ -9,6 +9,9 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from queue import Queue
+from stack import Stack
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -110,18 +113,92 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
+
+    
     def in_order_print(self):
-        pass
+        
+        #left one
+
+        if self.left:
+            self.left.in_order_print()
+        
+        if self.left is None:
+            print(self.value)
+            
+            
+        if self.right:
+            self.right.in_order_print()
+
+        if self.right is None:
+            print(self.value)
+            
+
+        
+ 
+        
+        
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self):
-        pass
+        cur_node = self
+        #queue
+        q = Queue()
+        #grab starting node and put it in a queue
+        q.enqueue(cur_node)
+        
+        #if there are items in the queue
+        while len(q) > 0:
+            
+            #dequeue what the current node is
+            cur_node = q.dequeue()
+            #print the value
+            print(cur_node.value)
+
+            if cur_node.left is not None: 
+                #    enqueue the left
+                q.enqueue(cur_node.left)
+                #self.left.bft_print()
+
+            #check right is something there
+            if cur_node.right is not None:
+                #    enqueue the right
+                q.enqueue(cur_node.right)
+                #self.right.bft_print()
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
-        pass
+        cur_node = self
+        #queue
+        q = Stack()
+        #grab starting node and put it in a queue
+        q.push(cur_node)
+        
+        #if there are items in the queue
+        while len(q) > 0:
+            
+            #dequeue what the current node is
+            cur_node = q.pop()
+            #print the value
+            print(cur_node.value)
+
+            if cur_node.left is not None: 
+                #    enqueue the left
+                q.push(cur_node.left)
+                #self.left.bft_print()
+
+            #check right is something there
+            if cur_node.right is not None:
+                #    push the right
+                q.push(cur_node.right)
+                #self.right.bft_print()
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -138,6 +215,7 @@ class BSTNode:
 """
 This code is necessary for testing the `print` methods
 """
+
 bst = BSTNode(1)
 
 bst.insert(8)
@@ -148,14 +226,14 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-#bst.bft_print()
-#bst.dft_print()
+bst.bft_print()
+bst.dft_print()
 
 print("elegant methods")
-print("pre order")
+#print("pre order")
 #bst.pre_order_dft()
 print("in order")
-#bst.in_order_dft()
-print("post order")
+bst.in_order_print()
+#print("post order")
 #bst.post_order_dft()  
-print(bst.get_max())
+#print(bst.get_max())

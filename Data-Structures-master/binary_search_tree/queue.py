@@ -51,7 +51,6 @@ class Node:
     def set_next(self, new_next):
         self.next_node = new_next
 
-
 class Queue:
     def __init__(self):
         self.size = 0
